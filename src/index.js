@@ -599,21 +599,23 @@ export default class extends Component {
         pages.unshift(total - 1 + '')
         pages.push('0')
       }
-
+      
       pages = pages.map((page, i) => {
-        if (props.loadMinimal) {
-          if (i >= (index + loopVal - props.loadMinimalSize) &&
-            i <= (index + loopVal + props.loadMinimalSize)) {
-            return <View style={pageStyle} key={i}>{children[page]}</View>
-          } else {
-            return (
-              <View style={pageStyleLoading} key={`loading-${i}`}>
-                {props.loadMinimalLoader ? props.loadMinimalLoader : <ActivityIndicator />}
-              </View>
-            );
-          }
-        } else {
+        // if (props.loadMinimal) {
+        //   if (i >= (index + loopVal - props.loadMinimalSize) &&
+        //     i <= (index + loopVal + props.loadMinimalSize)) {
+        //     return <View style={pageStyle} key={i}>{children[page]}</View>
+        //   } else {
+        //     return <View style={pageStyleLoading} key={`loading-${i}`}><ActivityIndicator /></View>
+        //   }
+        // } else {
+        //   return <View style={pageStyle} key={i}>{children[page]}</View>
+        // }
+
+        if ( i == index + 1 || i == index || index == index+2){
           return <View style={pageStyle} key={i}>{children[page]}</View>
+        }else{
+          return <View style={pageStyleLoading} key={`loading-${i}`}><ActivityIndicator /></View>
         }
       })
     } else {
